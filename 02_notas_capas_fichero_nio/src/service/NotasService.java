@@ -69,6 +69,7 @@ public class NotasService {
 		try {
 			return Files.lines(pt) //Stream<String>
 					.map(s->Double.parseDouble(s))//Stream<Double>
+					.sorted((a,b)->Double.compare(b, a))
 					.toList();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
