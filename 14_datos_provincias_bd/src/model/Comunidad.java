@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class Comunidad {
-	private int codigo;
+	private String codigo;
 	private String nombre;
 }

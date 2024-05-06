@@ -17,5 +17,5 @@ public class Provincia {
 	@SerializedName("COMUNIDAD_CIUDAD_AUTONOMA")
 	private String comunidad;
 	@SerializedName("CODAUTON")
-	private int codComunidad;
+	private String codComunidad;
 }
