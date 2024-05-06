@@ -11,11 +11,12 @@ import model.Comunidad;
 import model.Municipio;
 import model.Provincia;
 
-public class ComunidadesService {
+public class ComunidadesServiceImpl implements ComunidadesService {
 	String cadenaConexion="jdbc:mysql://localhost:3306/comunidades";
 	String usuario="root";
 	String password="root";
 	
+	@Override
 	public void saveComunidades(List<Comunidad> comunidades) {
 		try (Connection con=DriverManager.getConnection(cadenaConexion,usuario,password);){
 			String sql="insert into comunidades(codigo,nombre) values(?,?)";
@@ -49,6 +50,7 @@ public class ComunidadesService {
 			ex.printStackTrace();
 		}
 	}
+	@Override
 	public void saveProvincias(List<Provincia> provincias) {
 		try (Connection con=DriverManager.getConnection(cadenaConexion,usuario,password);){
 			String sql="insert into provincias(codigo,nombre,codComunidad) values(?,?,?)";
@@ -66,6 +68,7 @@ public class ComunidadesService {
 			ex.printStackTrace();
 		}
 	}
+	@Override
 	public void saveMunicipios(List<Municipio> municipios) {
 		try (Connection con=DriverManager.getConnection(cadenaConexion,usuario,password);){
 			String sql="insert into municipios(codigo,nombre,codProvincia,superficie,altitud,poblacion) values(?,?,?,?,?,?)";
