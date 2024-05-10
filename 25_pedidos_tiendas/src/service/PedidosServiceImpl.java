@@ -9,8 +9,8 @@ import model.Pedido;
 
 public class PedidosServiceImpl implements PedidosService {
 
-	@Override
-	public List<Pedido> pedidosTienda(String ruta, String tienda) {
+	
+	private List<Pedido> pedidosTienda(String ruta, String tienda) {
 		TiendasDao fDao=DaoFactory.getFicheroPedidosDao();
 		List<Pedido> pedidosFichero=fDao.getPedidos(ruta);
 		//recorremos los pedidos que llegan del fichero y les asignamos 
@@ -20,12 +20,19 @@ public class PedidosServiceImpl implements PedidosService {
 	
 	}
 
-	@Override
-	public void guardarPedidos(List<Pedido> pedidos) {
+	
+	private void guardarPedidos(List<Pedido> pedidos) {
 		PedidosDao pDao=DaoFactory.getPedidosDao();
 		//recorremos lista de pedidos y los guardamos
 		pedidos.forEach(p->pDao.save(p));
 
 	}
 
+	@Override
+	public void procesarPedidos(String ruta, String tienda) {
+		guardarPedidos(pedidosTienda(ruta,tienda));
+		
+	}
+
+	
 }
