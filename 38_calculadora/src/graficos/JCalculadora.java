@@ -1,11 +1,16 @@
 package graficos;
 
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class JCalculadora extends JFrame {
+	
 	public JCalculadora() {
 		super("Ventana controles");
 		this.setBounds(100,80,800,400);
@@ -44,6 +49,34 @@ public class JCalculadora extends JFrame {
 			int multi=Integer.parseInt(jtf1.getText())*Integer.parseInt(jtf2.getText());
 			jlResultado.setText("Producto: "+multi);
 		});
-		
+				
+		FocusListener listener1=new FocusListener() {			
+			@Override
+			public void focusLost(FocusEvent e) {
+				//cuando la caja pierda el foco, comprueba si el valor introducido es no numérico
+				//en cuyo caso, debe mantener el foco en la caja
+				JTextField jtf=(JTextField)e.getSource();//obtiene una referencia a la caja
+													//en la que se ha producido el evento
+				if(jtf.getText().isEmpty()) {
+					jtf.setText("0");
+					return;
+				}
+				try {
+					Integer.parseInt(jtf.getText());
+				}catch(NumberFormatException ex) {
+					JOptionPane.showMessageDialog(JCalculadora.this, "Debe escribir un número!");
+					jtf.requestFocus();//para que mantenga el foco en la caja
+					jtf.selectAll();//selecciona el texto introducido
+				}				
+			}		
+			@Override
+			public void focusGained(FocusEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		};
+		//asociamos el listener a las dos cajas
+		jtf1.addFocusListener(listener1);
+		jtf2.addFocusListener(listener1);
 	}
 }
