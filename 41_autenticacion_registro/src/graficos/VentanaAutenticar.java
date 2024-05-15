@@ -21,6 +21,7 @@ public class VentanaAutenticar extends JFrame {
 	private JPanel contentPane;
 	private JTextField jtfUsuario;
 	private JTextField jtfPassword;
+	private JButton jbtRegistrar;
 
 	/**
 	 * Launch the application.
@@ -86,6 +87,15 @@ public class VentanaAutenticar extends JFrame {
 		});
 		jbtAutenticar.setBounds(154, 163, 112, 23);
 		contentPane.add(jbtAutenticar);
+		
+		jbtRegistrar = new JButton("Registrar");
+		jbtRegistrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new VentanaRegistro();
+			}
+		});
+		jbtRegistrar.setBounds(25, 214, 89, 23);
+		contentPane.add(jbtRegistrar);
 	}
 
 }
